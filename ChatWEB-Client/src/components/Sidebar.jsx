@@ -5,7 +5,7 @@ import axios from 'axios';
 const Sidebar = ({ setChatInitiated, setChats, setReceiverId }) => {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
-    const [selectedUserId, setSelectedUserId] = useState(null); // New state for selected user
+    const [selectedUserId, setSelectedUserId] = useState(null);
 
     const handleLogout = () => {
         window.localStorage.removeItem("chat-token");
@@ -47,7 +47,7 @@ const Sidebar = ({ setChatInitiated, setChats, setReceiverId }) => {
 
         setChatInitiated(true);
         setReceiverId(id);
-        setSelectedUserId(id); // Set the selected user ID when starting chat
+        setSelectedUserId(id);
     };
 
     return (
