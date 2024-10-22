@@ -1,18 +1,22 @@
-import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
+import Chat from './pages/Chat'
+import io from 'socket.io-client'
+
+const socket = io.connect('http://localhost:5151')
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <BrowserRouter>
+    <><div
+      className="bg-cover h-full w-full justify-center"
+    >    <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home />}>
-          </Route>
+          <Route path='/' element={<Home />}> </Route>
+          <Route path='/chat' element={<Chat socket={socket} />}></Route>
         </Routes>
       </BrowserRouter>
+    </div >
     </>
   )
 }

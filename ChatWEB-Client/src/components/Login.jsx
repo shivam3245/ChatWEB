@@ -1,10 +1,25 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Login = ({ openSignup }) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    const handleSubmit = (e) => {
+    const navigate = useNavigate()
+    const handleSubmit = async (e) => {
         e.preventDefault()
+        try {
+            const response = await axios.post('http://localhost:5151/chat/user/login', { username, password })
+            console.log(response)
+            if (response.data.msg === "success") {
+                window.localStorage.setItem('chat-token', response.data.token)
+                window.localStorage.setItem('userId', response.data.user._id)
+                console.log(response.data.user)
+                navigate('/chat')
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (
@@ -16,8 +31,8 @@ const Login = ({ openSignup }) => {
                     <input onChange={(e) => setUsername(e.target.value)} type='text' className='w-full px-3 py-2 border' placeholder='Enter Username' />
                 </div>
                 <div>
-                    <label onChange={(e) => setPassword(e.target.value)} className='block text-gray-700y' htmlFor='password'>Password</label>
-                    <input type='password' className='w-full px-3 py-2 border' placeholder='Enter Your Password' />
+                    <label className='block text-gray-700y' htmlFor='password'>Password</label>
+                    <input onChange={(e) => setPassword(e.target.value)} type='password' className='w-full px-3 py-2 border' placeholder='Enter Your Password' />
                 </div>
                 <div className='mb-4 flex items-center justify-between'>
                     <label className='inline-flex items-center ' htmlFor='rememberme'>

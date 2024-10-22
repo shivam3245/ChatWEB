@@ -12,7 +12,11 @@ const Register = ({ openLogin }) => {
         formData.append('password', password)
         formData.append('image', file)
         try {
-            axios.post('http://localhost:5151/chat/user/register', formData)
+            const response = await axios.post('http://localhost:5151/chat/user/register', formData)
+            console.log(response)
+            if (response.data.msg === "success") {
+                openLogin()
+            }
         } catch (err) {
             console.log(err)
         }
