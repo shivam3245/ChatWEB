@@ -51,36 +51,36 @@ const Sidebar = ({ setChatInitiated, setChats, setReceiverId }) => {
     };
 
     return (
-        <div className='w-full md:w-1/4 bg-black p-4 bg-opacity-70 relative'>
+        <div className='w-full md:w-1/4 bg-white p-4 h-[100%] flex flex-col'>
             <input
                 type='text'
                 placeholder='Search'
                 className='w-full p-2 mb-4 border rounded'
             />
             {users.length > 0 ? (
-                <div className='space-y-4 overflow-y-auto max-h-96'>
+                <div className='space-y-4 overflow-y-auto flex-1'>
                     {users.map(user => (
                         <div
                             key={user._id}
                             onClick={() => startChat(user._id)}
                             className={`flex items-center space-x-4 p-2 hover:bg-gray-300 cursor-pointer 
-                                        ${selectedUserId === user._id ? 'bg-gray-400' : ''}`} // Conditionally apply bg-gray-400 if selected
+                                        ${selectedUserId === user._id ? 'bg-gray-400' : ''}`}
                         >
                             <img
                                 src={`http://localhost:5151/images/${user.image}`}
                                 alt='User Image'
                                 className='rounded-full w-12 h-12 object-cover border'
                             />
-                            <span className='text-white text-sm font-bold'>{user.username}</span>
+                            <span className='text-gray-800 text-sm font-bold'>{user.username}</span>
                         </div>
                     ))}
                 </div>
             ) : (
-                <p className='text-white font-bold'>No Users</p>
+                <p className='text-gray-800 font-bold'>No Users</p>
             )}
             <button
                 onClick={handleLogout}
-                className='absolute bottom-1 right-1 left-1 rounded hover:bg-blue-700 bg-blue-500 text-white p-2'
+                className=' bg-blue-500 text-white p-2 rounded hover:bg-blue-700'
             >
                 Logout
             </button>
