@@ -25,10 +25,7 @@ export const upload =multer({
 async function register(req,res){
     try{
         const {username,password}=req.body
-        const file= null;
-        if(req.image != null){
-            file=req.image.filename
-        }
+        const file= req.file != null ? req.file.filename : null;
 
         const userExist=await UserModel.findOne({username})
         if(userExist) {
