@@ -44,8 +44,7 @@ const Home = () => {
                 }
             }
         };
-
-        verifyUser();
+        {window.localStorage.getItem('chat-token') ? verifyUser() : console.log("Token not found")}
     }, [navigate]);
 
     return (

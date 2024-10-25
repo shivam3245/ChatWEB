@@ -5,7 +5,7 @@ dotenv.config();
 
 const verifyUser = async (req, res, next) => {
     try {
-        if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer')) {
+        if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer') || req.headers.authorization.startsWith('Bearer null')) {
             return res.status(401).json({ msg: "Unauthorized, no token provided" });
         }
 
