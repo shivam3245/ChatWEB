@@ -49,29 +49,30 @@ async function register(req,res){
     }
 }
 
-async function login(req,res){
-    try{
-        const {username,password}=req.body
+async function login(req, res) {
+    try {
+        const { username, password } = req.body;
 
-        const userExist=await UserModel.findOne({username})
-        if(!userExist) {
-            return res.status(400).json({msg: "User does not exists"})
+      
+        const userExist = await UserModel.findOne({ username });
+        if (!userExist) {
+            return res.status(400).json({ msg: "User does not exist" }); 
         }
 
-        const matchPassword=await bcrypt.compare(password, userExist.password)
-        if(!matchPassword){
-            return res.status(400).json({msg: "Incorrect Passsword"})
+       
+        const matchPassword = await bcrypt.compare(password, userExist.password);
+        if (!matchPassword) {
+            return res.status(400).json({ msg: "Incorrect password" }); 
         }
-        const token=jwt.sign({id:userExist._id}, process.env.JWT_SECRET, {
-            expiresIn:'1h'
-        })
-        return res.status(200).json({msg:"success", token, user:{_id:userExist._id, username:userExist.username}})
 
-
-    }  catch(error)
-        {
-        console.log(error)
-        return res.status(500).json({msg:"error"+ error})
+      
+        const token = jwt.sign({ id: userExist._id }, process.env.JWT_SECRET, {
+            expiresIn: '1h',
+        });
+        return res.status(200).json({ msg: "success", token, user: { _id: userExist._id, username: userExist.username } });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ msg: "An error occurred. Please try again." }); 
     }
 }
 
