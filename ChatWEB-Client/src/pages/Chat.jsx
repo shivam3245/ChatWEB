@@ -43,16 +43,19 @@ const Chat = ({ socket }) => {
     }, [chats, chatInitiated]);
 
     return (
-        <div className='flex flex-col lg:flex-row items-center justify-center h-screen bg-yellow-200'>
-            <div className='bg-cover w-full lg:w-2/4 h-[calc(100vh-60px)] rounded-lg flex relative' style={{ backgroundImage: "url('/BG.png')" }}>
+        <div className='flex flex-col lg:flex-row items-center justify-center h-screen bg-gray-500'>
+            <div
+                className='bg-cover w-full lg:w-2/4 h-[calc(100vh-60px)] rounded-lg flex relative'
+                style={{ backgroundImage: `url("https://wallpapercave.com/wp/wp4410716.jpg")` }}
+            >
                 <Sidebar setChatInitiated={setChatInitiated} setChats={setChats} setReceiverId={setReceiverId} />
                 <div className='w-full lg:w-3/4 bg-white flex flex-col bg-opacity-20 relative'>
                     {chatInitiated ? (
                         <>
-                            <div className='overflow-y-auto mb-2 px-4 flex-grow'>
+                            <div className='overflow-y-auto mb-2 px-4 flex-grow text-xl'>
                                 {chats && chats.map((chat, index) => (
                                     <div key={index} className={`flex w-full ${chat.sender === userId ? "justify-end" : "justify-start"}`}>
-                                        <div className={`p-2 my-2 max-w-xs rounded-lg break-words ${chat.sender === userId ? "bg-blue-500 text-white" : "bg-gray-300 text-black"}`}>
+                                        <div className={`p-2 my-2 max-w-xs rounded-lg break-words ${chat.sender === userId ? "bg-blue-500 text-white" : "bg-yellow-200 text-black"}`}>
                                             {chat.content}
                                         </div>
                                     </div>
