@@ -27,7 +27,7 @@ const Sidebar = ({ setChatInitiated, setChats, setReceiverId }) => {
                 console.log(err);
             }
         };
-        fetchUsers();
+        {window.localStorage.getItem('chat-token') ? fetchUsers() : navigate('/')}
     }, [navigate]);
 
     const startChat = async (id) => {
