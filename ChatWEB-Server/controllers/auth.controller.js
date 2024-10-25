@@ -25,7 +25,10 @@ export const upload =multer({
 async function register(req,res){
     try{
         const {username,password}=req.body
-        const file=req.file.filename
+        const file= null;
+        if(req.image != null){
+            file=req.image.filename
+        }
 
         const userExist=await UserModel.findOne({username})
         if(userExist) {
@@ -34,7 +37,7 @@ async function register(req,res){
 
         const hashpassword=await bcrypt.hash(password,10)
         const newUser=new UserModel({
-            username,
+            username : username,
             password:hashpassword,
             image:file
         })
