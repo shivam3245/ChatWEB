@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.emoji-picker-react .emoji-categories {
+    font-size: 0.8rem;
+
+}
+
+.emoji-picker-react .emoji-group {
+    font-size: 0.8rem;
+
+}
+
+.emoji-picker-react .emoji-search {
+    font-size: 0.8rem;
+}
+
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    /* Background of the scrollbar track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+
+    border-radius: 10px;
+
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.7);
+
+}
+
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.1);
+
+}

@@ -6,6 +6,7 @@ const Sidebar = ({ setChatInitiated, setChats, setReceiverId }) => {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [selectedUserId, setSelectedUserId] = useState(null);
+    const [searchUser, setSearchUser] = useState('');
 
     const handleLogout = () => {
         window.localStorage.removeItem("chat-token");
@@ -27,10 +28,14 @@ const Sidebar = ({ setChatInitiated, setChats, setReceiverId }) => {
                 console.log(err);
             }
         };
-        {window.localStorage.getItem('chat-token') ? fetchUsers() : navigate('/')}
+        { window.localStorage.getItem('chat-token') ? fetchUsers() : navigate('/') }
     }, [navigate]);
 
     const startChat = async (id) => {
+        setChatInitiated(true);
+        setReceiverId(id);
+        setSelectedUserId(id);
+
         try {
             const response = await axios.get("http://localhost:5151/chat/message/read/" + id, {
                 headers: {
@@ -39,53 +44,50 @@ const Sidebar = ({ setChatInitiated, setChats, setReceiverId }) => {
             });
             setChats(response.data);
         } catch (err) {
-            if (err.response?.data?.message === "Not Found") {
-                setChats([]);
-            }
+            setChats([]);
             console.log(err);
         }
-
-        setChatInitiated(true);
-        setReceiverId(id);
-        setSelectedUserId(id);
     };
 
+    const filteredUsers = users.filter(user =>
+        user.username.toLowerCase().includes(searchUser.toLowerCase())
+    );
+
     return (
-        <div className='w-full md:w-1/4 bg-white shadow-lg p-4 h-full flex flex-col rounded-lg'>
-            {/* Search Bar */}
+        <div className='sm:w-1/3 md:w-1/4 bg-gradient-to-br from-indigo-700 to-purple-800 text-white p-5 shadow-lg rounded-lg animate-fade-in flex flex-col h-full'>
             <input
                 type='text'
                 placeholder='Search Users...'
-                className='w-full p-3 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300'
+                value={searchUser}
+                onChange={(e) => setSearchUser(e.target.value)}
+                className='w-full p-3 mb-4 bg-white bg-opacity-20 rounded-lg text-gray-300 placeholder-gray-400 focus:ring-2 focus:ring-pink-500 outline-none'
             />
 
-            {/* Users List */}
-            {users.length > 0 ? (
-                <div className='space-y-4 overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100'>
-                    {users.map(user => (
+            <div className='flex-1 overflow-y-auto space-y-4 scrollbar-thin scrollbar-thumb-purple-600 scrollbar-track-indigo-700'>
+                {filteredUsers.length > 0 ? (
+                    filteredUsers.map(user => (
                         <div
                             key={user._id}
                             onClick={() => startChat(user._id)}
-                            className={`flex items-center space-x-4 p-2 hover:bg-gray-300 cursor-pointer transition-all duration-200 rounded-lg 
-                                        ${selectedUserId === user._id ? 'bg-blue-100' : ''}`}
+                            className={`flex items-center p-2 cursor-pointer rounded-lg transition-all duration-200 
+                                        ${selectedUserId === user._id ? 'bg-purple-600' : 'hover:bg-purple-500'}`}
                         >
                             <img
                                 src={`http://localhost:5151/images/${user.image}`}
                                 alt='User'
-                                className='rounded-full w-12 h-12 object-cover border'
+                                className='rounded-full w-10 h-10 object-cover border-2 border-indigo-400'
                             />
-                            <span className='text-gray-800 font-medium'>{user.username}</span>
+                            <span className='ml-4 font-semibold'>{user.username}</span>
                         </div>
-                    ))}
-                </div>
-            ) : (
-                <p className='text-gray-800 font-semibold'>No Users</p>
-            )}
+                    ))
+                ) : (
+                    <p className='text-center text-gray-300'>No Users Found</p>
+                )}
+            </div>
 
-            {/* Logout Button */}
             <button
                 onClick={handleLogout}
-                className='mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300'
+                className='mt-4 bg-pink-500 py-2 px-4 rounded-full font-semibold hover:bg-pink-600 transition duration-300 self-center w-full'
             >
                 Logout
             </button>
