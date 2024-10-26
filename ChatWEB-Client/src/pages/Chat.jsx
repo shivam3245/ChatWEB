@@ -40,9 +40,9 @@ const Chat = ({ socket }) => {
     }, [chats, chatInitiated]);
 
     return (
-        <div className='flex flex-col lg:flex-row items-center justify-center h-screen bg-gradient-to-r from-red-600 to-purple-700'>
+        <div className='flex flex-col lg:flex-row items-center justify-center h-screen bg-gradient-to-br from-purple-700 to-purple-950'>
             <div
-                className='bg-cover w-full lg:w-2/4 h-[calc(100vh-30px)] rounded-lg flex relative bg-gradient-to-tl from-blue-300 to-sky-700'
+                className='bg-cover w-full lg:w-2/4 h-[calc(100vh-30px)] rounded-lg flex relative bg-gradient-to-l from-purple-300 to-purple-00'
                 ref={chatContainerRef}
             >
                 <Sidebar setChatInitiated={setChatInitiated} setChats={setChats} setReceiverId={setReceiverId} />
@@ -52,7 +52,7 @@ const Chat = ({ socket }) => {
                             <div className='overflow-y-auto mb-2 px-4 flex-grow text-xs md:text-lg relative custom-scrollbar'>
                                 {chats && chats.map((chat, index) => (
                                     <div key={index} className={`flex w-full ${chat.sender === userId ? "justify-end" : "justify-start"}`}>
-                                        <div className={`p-2 my-2 max-w-xs rounded-lg break-words ${chat.sender === userId ? "bg-gradient-to-br from-red-600 to-purple-600 text-white" : "bg-gradient-to-br from-blue-400 to-purple-800 text-white"}`}>
+                                        <div className={`p-2 my-2 max-w-xs rounded-lg break-words ${chat.sender === userId ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white" : "bg-gradient-to-br from-gray-500 to-gray-600 text-white"}`}>
                                             {chat.content}
                                         </div>
                                     </div>

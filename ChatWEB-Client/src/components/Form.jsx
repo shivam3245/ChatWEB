@@ -69,7 +69,7 @@ const Form = ({ receiverId, setChats, chats, socket, containerWidth }) => {
                     className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 text-sm focus:ring-blue-500'
                 />
                 <input type="file" className='hidden' id='file-upload' />
-                <button className='p-2 ml-2 bg-red-600 text-xs md:text-md text-white rounded-lg hover:bg-yellow-600 transition duration-200'>
+                <button className='p-2 ml-2 bg-purple-800 text-sm md:text-lg text-white rounded-lg hover:bg-yellow-600 transition duration-200'>
                     Send
                 </button>
             </form>

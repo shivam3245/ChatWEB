@@ -28,7 +28,7 @@ const Login = ({ openSignup }) => {
 
     return (
         <div className='flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-900 via-purple-900 to-gray-900 p-5 overflow-hidden'>
-            <div className='relative w-full max-w-md bg-white bg-opacity-10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-[0_15px_80px_rgba(0,0,0,0.8)] p-8 md:p-10 flex flex-col justify-center space-y-8 z-20'>
+            <div className='relative w-full max-w-md bg-white bg-opacity-10 backdrop-blur-3xl border border-white/20 rounded-3xl shadow-[0_15px_80px_rgba(0,0,0,0.8)] p-8 md:p-10 flex flex-col justify-center space-y-8 z-20'>
                 <h1 className='text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500'>
                     Login
                 </h1>
