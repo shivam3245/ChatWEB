@@ -24,9 +24,17 @@ const verifyUser = async (req, res, next) => {
         const user = await UserModel.findOne({ _id: decoded.id }).select('-password');
         req.user = user;
         next();
-    } catch (err) {
-        console.log(err);
-        return res.status(500).json({ msg: "Server error" });
+    }
+
+     catch (err) {
+        if(err instanceof jwt.TokenExpiredError){
+            console.log(err.message);
+            return res.status(401).json({ msg : "Token Expired" });
+        }
+        else{
+            console.log(err);
+            return res.status(500).json({ msg: "Server error" });
+        }
     }
 };
 

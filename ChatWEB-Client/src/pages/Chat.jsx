@@ -55,6 +55,9 @@ const Chat = ({ socket }) => {
                                         <div className={`p-2 my-2 max-w-xs rounded-lg break-words ${chat.sender === userId ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white" : "bg-gradient-to-br from-gray-500 to-gray-600 text-white"}`}>
                                             {chat.content}
                                         </div>
+                                        <div className={`p-2 my-2 max-w-xs rounded-lg break-words ${chat.sender === userId ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white" : "bg-gradient-to-br from-gray-500 to-gray-600 text-white"}`}>
+                                            {chat.createdAt}
+                                        </div>
                                     </div>
                                 ))}
                                 <div ref={messagesEndRef} />
