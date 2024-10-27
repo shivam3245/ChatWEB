@@ -24,7 +24,7 @@ const Form = ({ receiverId, setChats, chats, socket, containerWidth }) => {
                 }
             );
             socket.emit('newMessage', { sender: userId, content: message, receiver: receiverId });
-            setChats([...chats, { content: message, sender: userId }]);
+            setChats([...chats, { content: message, sender: userId, createdAt: Date.now() }]);
             setMessage('');
         } catch (error) {
             console.log(error);
