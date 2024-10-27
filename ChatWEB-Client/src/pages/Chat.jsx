@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Sidebar from '../components/Sidebar';
 import Form from '../components/Form';
+import { format, isToday } from 'date-fns';
 
 const Chat = ({ socket }) => {
     const [chatInitiated, setChatInitiated] = useState(false);
@@ -52,12 +53,18 @@ const Chat = ({ socket }) => {
                             <div className='overflow-y-auto mb-2 px-4 flex-grow text-xs md:text-lg relative custom-scrollbar'>
                                 {chats && chats.map((chat, index) => (
                                     <div key={index} className={`flex w-full ${chat.sender === userId ? "justify-end" : "justify-start"}`}>
-                                        <div className={`p-2 my-2 max-w-xs rounded-lg break-words ${chat.sender === userId ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white" : "bg-gradient-to-br from-gray-500 to-gray-600 text-white"}`}>
+                                        <div className={`p-2 my-2 max-w-xs text-sm rounded-lg break-words ${chat.sender === userId ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white" : "bg-gradient-to-br from-gray-500 to-gray-600 text-white"}`}>
                                             {chat.content}
+                                            <br></br>
+                                            <p className='text-xs text-gray-400'>
+                                                {isToday(new Date(chat.createdAt))
+                                                    ? format(new Date(chat.createdAt), 'hh:mm a')
+                                                    : format(new Date(chat.createdAt), 'MMM dd, hh:mm a')
+                                                }
+                                            </p>
+
                                         </div>
-                                        <div className={`p-2 my-2 max-w-xs rounded-lg break-words ${chat.sender === userId ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white" : "bg-gradient-to-br from-gray-500 to-gray-600 text-white"}`}>
-                                            {chat.createdAt}
-                                        </div>
+
                                     </div>
                                 ))}
                                 <div ref={messagesEndRef} />
