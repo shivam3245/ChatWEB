@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { APIUrl } from '../../utils';
 
 const Sidebar = ({ setChatInitiated, setChats, setReceiverId }) => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Sidebar = ({ setChatInitiated, setChats, setReceiverId }) => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:5151/chat/users', {
+                const response = await axios.get(`${APIUrl}/chat/users`, {
                     headers: {
                         "Authorization": `Bearer ${window.localStorage.getItem('chat-token')}`,
                     }
@@ -37,7 +38,7 @@ const Sidebar = ({ setChatInitiated, setChats, setReceiverId }) => {
         setSelectedUserId(id);
 
         try {
-            const response = await axios.get("http://localhost:5151/chat/message/read/" + id, {
+            const response = await axios.get(`${APIUrl}/chat/message/read/` + id, {
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem('chat-token')}`,
                 },
@@ -73,7 +74,7 @@ const Sidebar = ({ setChatInitiated, setChats, setReceiverId }) => {
                                         ${selectedUserId === user._id ? 'bg-purple-600' : 'hover:bg-purple-500'}`}
                         >
                             <img
-                                src={`http://localhost:5151/images/${user.image}`}
+                                src={`${process.env.API_URL}/images/${user.image}`}
                                 alt='User'
                                 className='rounded-full w-10 h-10 object-cover border-2 border-indigo-400'
                             />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { APIUrl } from '../../utils';
 
 const Login = ({ openSignup }) => {
     const [username, setUsername] = useState("");
@@ -12,7 +13,7 @@ const Login = ({ openSignup }) => {
         e.preventDefault();
         setErrorMessage("");
         try {
-            const response = await axios.post('http://localhost:5151/chat/user/login', { username, password });
+            const response = await axios.post(`${APIUrl}/chat/user/login`, { username, password });
             console.log(response);
             if (response.data.msg === "success") {
                 window.localStorage.setItem('chat-token', response.data.token);

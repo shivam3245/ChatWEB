@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Picker from 'emoji-picker-react';
+import { APIUrl } from '../../utils';
 
 const Form = ({ receiverId, setChats, chats, socket, containerWidth }) => {
     const [message, setMessage] = useState('');
@@ -15,7 +16,7 @@ const Form = ({ receiverId, setChats, chats, socket, containerWidth }) => {
         e.preventDefault();
         if (!message.trim()) return;
         try {
-            const response = await axios.post("http://localhost:5151/chat/message/send/" + receiverId,
+            const response = await axios.post(`${APIUrl}/chat/message/send/` + receiverId,
                 { content: message },
                 {
                     headers: {

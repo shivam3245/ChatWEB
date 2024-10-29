@@ -4,6 +4,7 @@ import Register from '../components/Register';
 import Login from '../components/Login';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { APIUrl } from '../../utils';
 
 const Home = () => {
     const [isModelOpen, setIsModelOpen] = useState(false);
@@ -24,7 +25,7 @@ const Home = () => {
     useEffect(() => {
         const verifyUser = async () => {
             try {
-                const response = await axios.get('http://localhost:5151/chat/user/verify', {
+                const response = await axios.get(`${APIUrl}/chat/user/verify`, {
                     headers: {
                         "Authorization": `Bearer ${window.localStorage.getItem('chat-token')}`,
                     }

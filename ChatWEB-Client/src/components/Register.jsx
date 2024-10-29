@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { APIUrl } from '../../utils';
 
 const Register = ({ openLogin }) => {
     const [username, setUsername] = useState("");
@@ -14,7 +15,7 @@ const Register = ({ openLogin }) => {
         formData.append('image', file);
 
         try {
-            const response = await axios.post('http://localhost:5151/chat/user/register', formData);
+            const response = await axios.post(`${APIUrl}/chat/user/register`, formData);
             console.log(response);
             if (response.data.msg === "success") {
                 openLogin();

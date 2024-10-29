@@ -2,8 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Chat from './pages/Chat'
 import io from 'socket.io-client'
+import { APIUrl } from '../utils'
 
-const socket = io.connect('http://localhost:5151')
+const socket = io.connect(APIUrl)
 
 function App() {
 
