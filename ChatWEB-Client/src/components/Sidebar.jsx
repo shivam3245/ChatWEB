@@ -84,7 +84,7 @@ const Sidebar = ({ setChatInitiated, setChats, setReceiverId, setSelectedUser })
                                         ${selectedUserId === user._id ? 'bg-purple-600' : 'hover:bg-purple-500'}`}
                             >
                                 <img
-                                    src={`${APIUrl}/images/${user.image}`}
+                                    src={`${user.image}`}
                                     alt='User'
                                     className='rounded-full w-10 h-10 object-cover border-2 border-indigo-400'
                                 />
