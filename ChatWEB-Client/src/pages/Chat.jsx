@@ -54,7 +54,7 @@ const Chat = ({ socket }) => {
                         <>
                             <div className='bg-violet-800 text-white p-2 flex items-center'>
                                 <img
-                                    src={`${APIUrl}/images/${selectedUser.image}`}
+                                    src={`${selectedUser.image}`}
                                     alt=''
                                     className='rounded-full w-10 h-10 object-cover mr-2 border-2 border-white'
                                 />
