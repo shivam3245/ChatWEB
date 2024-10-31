@@ -20,7 +20,7 @@ const Chat = ({ socket }) => {
     useEffect(() => {
         const handleNewMessages = (message) => {
             if (receiverId === message.sender || receiverId === message.receiver) {
-                setChats(state => [...state, { sender: message.sender, content: message.content }]);
+                setChats(state => [...state, { sender: message.sender, content: message.content, createdAt: message.createdAt }]);
             }
         };
         socket.on('newMessage', handleNewMessages);
